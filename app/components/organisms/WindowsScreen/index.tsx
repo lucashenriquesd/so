@@ -33,9 +33,14 @@ export default function WindowsScreen() {
     );
   };
 
+  const handleDesktopClick = () => {
+    setIsActiveStartMenu(false);
+    setSelectedApp(null);
+  };
+
   return (
     <div className="min-h-screen relative flex flex-col bg-[#008080]">
-      <Desktop>
+      <Desktop onDesktopClick={handleDesktopClick}>
         <DesktopItem />
       </Desktop>
       <WindowsBar isActiveStartMenu={isActiveStartMenu} setIsActiveStartMenu={setIsActiveStartMenu}>
