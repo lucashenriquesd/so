@@ -23,11 +23,11 @@ export default function WindowsBarApp() {
   ];
 
   if (selected) {
-    containerClassNames.push("border-gray-200");
-    pseudoClassNames.push("border-gray-500");
-  } else {
     containerClassNames.push("border-gray-500");
     pseudoClassNames.push("border-gray-200");
+  } else {
+    containerClassNames.push("border-gray-200");
+    pseudoClassNames.push("border-gray-500");
   }
 
   return (
