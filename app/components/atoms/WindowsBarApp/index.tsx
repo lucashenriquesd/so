@@ -1,28 +1,15 @@
-import { useState } from "react";
+type WindowsBarAppProps = {
+  name: string;
+  selected?: boolean;
+  setSelected?: () => void;
+};
 
-export default function WindowsBarApp() {
-  const [selected, setSelected] = useState(false);
+export default function WindowsBarApp(props: WindowsBarAppProps) {
+  const containerClassNames = ["m-2", "min-w-[180px]", "border-t", "border-l"];
 
-  function handleclick() {
-    console.log("My Computer clicked");
-    setSelected(!selected);
-  }
+  const pseudoClassNames = ["flex", "justify-start", "border-b", "border-r"];
 
-  const containerClassNames = [
-    "m-2",
-    "min-w-[180px]",
-    "border-t",
-    "border-l",
-  ];
-
-  const pseudoClassNames = [
-    "flex",
-    "justify-start",
-    "border-b",
-    "border-r",
-  ];
-
-  if (selected) {
+  if (props.selected) {
     containerClassNames.push("border-gray-500");
     pseudoClassNames.push("border-gray-200");
   } else {
@@ -33,8 +20,11 @@ export default function WindowsBarApp() {
   return (
     <div className={containerClassNames.join(" ")}>
       <div className={pseudoClassNames.join(" ")}>
-        <button className="p-[2px] flex-1 text-start" onClick={handleclick}>
-          My Computer
+        <button
+          className="p-[2px] flex-1 text-start"
+          onClick={props.setSelected}
+        >
+          {props.name}
         </button>
       </div>
     </div>
