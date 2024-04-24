@@ -1,6 +1,7 @@
 type WindowsBarMenuItemProps = {
   text: string;
   onClick?: () => void;
+  isCategory?: boolean;
 };
 
 export default function WindowsBarMenuItem(props: WindowsBarMenuItemProps) {

@@ -4,6 +4,8 @@ export default function WindowsBarMenu() {
   const containerClassNames = [
     "absolute",
     "bottom-full",
+    // "relative",
+    "z-10",
     "bg-[#c0c0c0]",
     "w-52",
     "min-w-[180px]",
