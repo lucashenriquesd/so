@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import WindowsBarApp from "../../atoms/WindowsBarApp";
-import WindowsBarStartButton from "../../atoms/WindowsBarStartButton";
-import WindowsBarMenu from '../WindowsBarMenu';
+import WindowsBarStartButton from "@/app/components/atoms/WindowsBarStartButton";
+import WindowsBarMenu from '@/app/components/organisms/WindowsBarMenu';
 
 type WindowsBarProps = {
   children?: React.ReactNode;

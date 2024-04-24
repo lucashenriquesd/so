@@ -5,8 +5,8 @@ type WindowsBarMenuItemProps = {
 
 export default function WindowsBarMenuItem(props: WindowsBarMenuItemProps) {
   return (
-    <div>
-      <button onClick={props.onClick}>{props.text}</button>
+    <div className="flex">
+      <button onClick={props.onClick} className="p-[2px] flex-1 text-start">{props.text}</button>
     </div>
   );
 }
