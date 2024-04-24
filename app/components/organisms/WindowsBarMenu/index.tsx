@@ -1,4 +1,4 @@
-import WindowsBarMenuItem from "../../atoms/WindowsBarMenuItem";
+import WindowsBarMenuItem from "@/app/components/atoms/WindowsBarMenuItem";
 
 export default function WindowsBarMenu() {
   const containerClassNames = [

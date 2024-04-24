@@ -25,8 +25,10 @@ export default function Home() {
   ];
   const [openedApps, setOpenedApps] = useState(tempDefaultOpenedApps);
   const [selectedApp, setSelectedApp] = useState<number | null>(null);
+  const [isActiveStartMenu, setIsActiveStartMenu] = useState(false);
 
   const handleAppClick = (index: number) => {
+    setIsActiveStartMenu(false);
     setSelectedApp((prevSelectedApp) =>
       prevSelectedApp === index ? null : index
     );
@@ -34,7 +36,7 @@ export default function Home() {
 
   return (
     <WindowsScreen>
-      <WindowsBar>
+      <WindowsBar isActiveStartMenu={isActiveStartMenu} setIsActiveStartMenu={setIsActiveStartMenu}>
         {openedApps.map(({ Component: App, props }, i) => (
           <App
             key={i}
