@@ -3,15 +3,10 @@ type WindowsBarButtonProps = {
   icon?: React.ReactNode;
   name: string;
   selected: boolean;
-  setSelected: () => void;
+  handleStartClick: () => void;
 };
 
 export default function WindowsBarButton(props: WindowsBarButtonProps) {
-  function handleClick() {
-    console.log(`${props.name} WindowsBarButton clicked`);
-    props.setSelected();
-  }
-
   const containerClassNames = ["m-2", "border-t", "border-l"];
   const pseudoClassNames = ["flex", "justify-start", "border-b", "border-r"];
 
@@ -32,7 +27,7 @@ export default function WindowsBarButton(props: WindowsBarButtonProps) {
       <div className={pseudoClassNames.join(" ")}>
         <button
           className="flex items-center p-[2px] flex-1 text-start cursor-default"
-          onClick={handleClick}
+          onClick={props.handleStartClick}
         >
           {props.icon}
           <span className={props.selected ? "font-semibold" : "font-normal"}>

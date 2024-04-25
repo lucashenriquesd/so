@@ -7,7 +7,7 @@ import DesktopItem from "@/app/components/molecules/DesktopItem";
 type AppType = ComponentType<{
   name: string;
   selected: boolean;
-  setSelected: () => void;
+  handleAppClick: () => void;
 }>;
 
 type AppInstance = {
@@ -27,15 +27,18 @@ export default function WindowsScreen() {
   const [isStartSelected, setisStartSelected] = useState(false);
 
   const handleDesktopClick = () => {
+    console.log('Desktop WindowsScreen clicked');
     setisStartSelected(false);
     setSelectedApp(null);
   };
 
   const handleStartClick = () => {
+    console.log(`Start WindowsScreen clicked`);
     setisStartSelected(!isStartSelected);
   };
 
   const handleAppClick = (index: number) => {
+    console.log(`${openedApps[index].props.name} WindowsScreen clicked`);
     setisStartSelected(false);
     setSelectedApp((prevSelectedApp) =>
       prevSelectedApp === index ? null : index
@@ -44,19 +47,19 @@ export default function WindowsScreen() {
 
   return (
     <div className="min-h-screen relative flex flex-col bg-[#008080]">
-      <Desktop onDesktopClick={handleDesktopClick}>
+      <Desktop handleDesktopClick={handleDesktopClick}>
         <DesktopItem />
       </Desktop>
       <WindowsBar
         isStartSelected={isStartSelected}
-        setIsStartSelected={handleStartClick}
+        handleStartClick={handleStartClick}
       >
         {openedApps.map(({ Component: App, props }, i) => (
           <App
             key={i}
             {...props}
             selected={selectedApp === i}
-            setSelected={() => handleAppClick(i)}
+            handleAppClick={() => handleAppClick(i)}
           />
         ))}
       </WindowsBar>
