@@ -14,6 +14,7 @@ export default function WindowsBarApp(props: WindowsBarAppProps) {
 
   return (
     <WindowsBarButton
+      width="180px"
       name={props.name}
       selected={props.selected}
       setSelected={handleClick}

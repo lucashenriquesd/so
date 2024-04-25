@@ -1,4 +1,5 @@
 type WindowsBarButtonProps = {
+  width?: string;
   icon?: React.ReactNode;
   name: string;
   selected: boolean;
@@ -11,9 +12,12 @@ export default function WindowsBarButton(props: WindowsBarButtonProps) {
     props.setSelected();
   }
 
-  const containerClassNames = ["m-2", "min-w-[180px]", "border-t", "border-l"];
-
+  const containerClassNames = ["m-2", "border-t", "border-l"];
   const pseudoClassNames = ["flex", "justify-start", "border-b", "border-r"];
+
+  if (props.width) {
+    containerClassNames.push(`w-[${props.width}]`);
+  }
 
   if (props.selected) {
     containerClassNames.push("border-gray-500");
@@ -31,7 +35,9 @@ export default function WindowsBarButton(props: WindowsBarButtonProps) {
           onClick={handleClick}
         >
           {props.icon}
-          <span>{props.name}</span>
+          <span className={props.selected ? "font-semibold" : "font-normal"}>
+            {props.name}
+          </span>
         </button>
       </div>
     </div>
