@@ -24,18 +24,22 @@ export default function WindowsScreen() {
   ];
   const [openedApps, setOpenedApps] = useState(tempDefaultOpenedApps);
   const [selectedApp, setSelectedApp] = useState<number | null>(null);
-  const [isActiveStartMenu, setIsActiveStartMenu] = useState(false);
+  const [isStartSelected, setisStartSelected] = useState(false);
+
+  const handleDesktopClick = () => {
+    setisStartSelected(false);
+    setSelectedApp(null);
+  };
+
+  const handleStartClick = () => {
+    setisStartSelected(!isStartSelected);
+  };
 
   const handleAppClick = (index: number) => {
-    setIsActiveStartMenu(false);
+    setisStartSelected(false);
     setSelectedApp((prevSelectedApp) =>
       prevSelectedApp === index ? null : index
     );
-  };
-
-  const handleDesktopClick = () => {
-    setIsActiveStartMenu(false);
-    setSelectedApp(null);
   };
 
   return (
@@ -43,7 +47,10 @@ export default function WindowsScreen() {
       <Desktop onDesktopClick={handleDesktopClick}>
         <DesktopItem />
       </Desktop>
-      <WindowsBar isActiveStartMenu={isActiveStartMenu} setIsActiveStartMenu={setIsActiveStartMenu}>
+      <WindowsBar
+        isStartSelected={isStartSelected}
+        setIsStartSelected={handleStartClick}
+      >
         {openedApps.map(({ Component: App, props }, i) => (
           <App
             key={i}

@@ -1,17 +1,20 @@
+import WindowsBarButton from "@/app/components/molecules/WindowsBarButton";
 import StartIconSvg from "./StartIconSvg";
 
 type WindowsBarStartButtonProps = {
+  isStartSelected: boolean;
   onClickStart: () => void;
 };
 
-export default function WindowsBarStartButton(props: WindowsBarStartButtonProps) {
+export default function WindowsBarStartButton(
+  props: WindowsBarStartButtonProps
+) {
   return (
-    <button
-      onClick={props.onClickStart}
-      className="flex items-center border border-gray-800"
-    >
-      <StartIconSvg style={{ width: 25, height: 25}} />
-      Start
-    </button>
+    <WindowsBarButton
+      icon={<StartIconSvg style={{ width: 25, height: 25 }} />}
+      name="Start"
+      selected={props.isStartSelected}
+      setSelected={props.onClickStart}
+    />
   );
 }
