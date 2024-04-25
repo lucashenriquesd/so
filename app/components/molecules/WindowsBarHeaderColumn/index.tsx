@@ -1,7 +1,7 @@
 export default function WindowsBarHeaderColumn() {
   return (
     <div
-      className="flex bg-[#86888f] transform rotate-180"
+      className="flex bg-[#86888f] transform rotate-180 cursor-default select-none"
       style={{ writingMode: "vertical-rl" }}
     >
       <span className="text-[#9fa1a4]">Windows</span>
