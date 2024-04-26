@@ -31,7 +31,10 @@ export default function WindowsScreen() {
   ]);
 
   function openApp(name: string) {
-    setOpenedApps(prevApps => [...prevApps, { Component: WindowsBarApp, props: { name } }]);
+    setOpenedApps((prevApps) => [
+      ...prevApps,
+      { Component: WindowsBarApp, props: { name } },
+    ]);
   }
 
   function moveDesktopItem(
@@ -65,6 +68,10 @@ export default function WindowsScreen() {
     setisStartSelected(!isStartSelected);
   }
 
+  function handleWindowsBarClick() {
+    console.log(`WindowsBar WindowsScreen clicked`);
+  }
+
   function handleAppClick(index: number) {
     console.log(`${openedApps[index].props.name} WindowsScreen clicked`);
     setisStartSelected(false);
@@ -92,6 +99,7 @@ export default function WindowsScreen() {
       <WindowsBar
         isStartSelected={isStartSelected}
         handleStartClick={handleStartClick}
+        handleWindowsBarClick={handleWindowsBarClick}
       >
         {openedApps.map(({ Component: App, props }, i) => (
           <App
