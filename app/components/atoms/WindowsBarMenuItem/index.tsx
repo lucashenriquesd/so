@@ -32,7 +32,7 @@ export default function WindowsBarMenuItem(props: WindowsBarMenuItemProps) {
           {props.text}
         </button>
       </div>
-      {isOpen && props.children && <Menu isSubMenuOpen>{props.children}</Menu>}
+      {isOpen && props.children && <Menu isSubMenu>{props.children}</Menu>}
     </div>
   );
 }
