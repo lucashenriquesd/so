@@ -49,6 +49,13 @@ export default function WindowsScreen() {
     <div className="min-h-screen flex flex-col bg-[#008080]">
       <Desktop handleDesktopClick={handleDesktopClick}>
         <DesktopItem />
+        <DesktopItem />
+        <DesktopItem />
+        <DesktopItem />
+        <DesktopItem />
+        <DesktopItem />
+        <DesktopItem />
+        <DesktopItem />
       </Desktop>
       <WindowsBar
         isStartSelected={isStartSelected}
