@@ -18,10 +18,7 @@ type AppInstance = {
 };
 
 export default function WindowsScreen() {
-  const tempDefaultOpenedApps: AppInstance[] = [
-    { Component: WindowsBarApp, props: { name: "My Computer" } },
-    { Component: WindowsBarApp, props: { name: "My Documents" } },
-  ];
+  const tempDefaultOpenedApps: AppInstance[] = [];
   const [openedApps, setOpenedApps] = useState(tempDefaultOpenedApps);
   const [selectedApp, setSelectedApp] = useState<number | null>(null);
   const [isStartSelected, setisStartSelected] = useState(false);
@@ -32,6 +29,10 @@ export default function WindowsScreen() {
       position: { row: 1, col: 1 },
     },
   ]);
+
+  function openApp(name: string) {
+    setOpenedApps(prevApps => [...prevApps, { Component: WindowsBarApp, props: { name } }]);
+  }
 
   function moveDesktopItem(
     name: string,
@@ -84,6 +85,7 @@ export default function WindowsScreen() {
             image={item.image}
             name={item.name}
             position={item.position}
+            onDoubleClick={() => openApp(item.name)}
           />
         ))}
       </Desktop>

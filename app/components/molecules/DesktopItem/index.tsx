@@ -5,6 +5,7 @@ type DesktopItemProps = {
   image: StaticImageData | string;
   name: string;
   position: { row: number; col: number };
+  onDoubleClick: () => void;
 };
 
 export default function DesktopItem(props: DesktopItemProps) {
@@ -30,6 +31,7 @@ export default function DesktopItem(props: DesktopItemProps) {
       draggable
       onDragStart={dragStart}
       onDragEnd={dragEnd}
+      onDoubleClick={props.onDoubleClick}
       className={classNames.join(" ")}
       style={{ gridRow: props.position.row, gridColumn: props.position.col }}
     >
