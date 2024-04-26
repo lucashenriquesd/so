@@ -1,32 +1,17 @@
-type WindowsBarMenuItemProps = {
-  children?: React.ReactNode;
+type WindowsBarMenuProps = {
+  children: React.ReactNode;
+  isSubMenuOpen?: boolean;
 };
 
-export default function Menu(props: WindowsBarMenuItemProps) {
-  const containerClassNames = [
-    "absolute",
-    "bottom-full",
-    "z-10",
-    "bg-[#c0c0c0]",
-    "w-52",
-    "min-w-[180px]",
-    "border-t",
-    "border-l",
-    "border-gray-200",
-  ];
-  const pseudoClassNames = [
-    "flex",
-    "justify-start",
-    "border-b",
-    "border-r",
-    "border-gray-500",
-  ];
+export default function Menu(props: WindowsBarMenuProps) {
+  const containerClassNames = ["absolute", "z-10", "bg-[#c0c0c0]"];
 
-  return (
-    <div className={containerClassNames.join(" ")}>
-      <div className={pseudoClassNames.join(" ")}>
-        {props.children}
-      </div>
-    </div>
-  );
+  if (props.isSubMenuOpen) {
+    containerClassNames.push("left-full");
+    containerClassNames.push("top-0");
+  } else {
+    containerClassNames.push("bottom-full");
+  }
+
+  return <div className={containerClassNames.join(" ")}>{props.children}</div>;
 }

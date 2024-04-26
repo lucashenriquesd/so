@@ -27,7 +27,7 @@ export default function WindowsScreen() {
   const [isStartSelected, setisStartSelected] = useState(false);
 
   const handleDesktopClick = () => {
-    console.log('Desktop WindowsScreen clicked');
+    console.log("Desktop WindowsScreen clicked");
     setisStartSelected(false);
     setSelectedApp(null);
   };
@@ -46,7 +46,7 @@ export default function WindowsScreen() {
   };
 
   return (
-    <div className="min-h-screen relative flex flex-col bg-[#008080]">
+    <div className="min-h-screen flex flex-col bg-[#008080]">
       <Desktop handleDesktopClick={handleDesktopClick}>
         <DesktopItem />
       </Desktop>
