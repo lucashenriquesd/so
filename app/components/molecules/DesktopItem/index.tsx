@@ -11,6 +11,7 @@ type DesktopItemProps = {
 
 export default function DesktopItem(props: DesktopItemProps) {
   const [dragging, setDragging] = useState(false);
+  const [selected, setSelected] = useState(false);
 
   function dragStart(e: React.DragEvent<HTMLDivElement>) {
     setDragging(true);
@@ -21,10 +22,22 @@ export default function DesktopItem(props: DesktopItemProps) {
     setDragging(false);
   }
 
-  const classNames = ["flex flex-col items-center whitespace-nowrap"];
+  function handleClick(e: React.MouseEvent) {
+    setSelected(!selected);
+    props.onClick(e);
+  }
+
+  const classNames = ["flex", "flex-col", "items-center", "whitespace-nowrap"];
+  const classNamesText = ["text-[#c2f0f9]", "cursor-default", "select-none"];
 
   if (dragging) {
     classNames.push("opacity-50");
+  }
+
+  if (selected) {
+    classNamesText.push("bg-[#0005a0]");
+    classNamesText.push("border");
+    classNamesText.push("border-dotted");
   }
 
   return (
@@ -32,7 +45,7 @@ export default function DesktopItem(props: DesktopItemProps) {
       draggable
       onDragStart={dragStart}
       onDragEnd={dragEnd}
-      onClick={props.onClick}
+      onClick={(e: React.MouseEvent) => handleClick(e)}
       onDoubleClick={props.onDoubleClick}
       className={classNames.join(" ")}
       style={{ gridRow: props.position.row, gridColumn: props.position.col }}
@@ -46,7 +59,7 @@ export default function DesktopItem(props: DesktopItemProps) {
           height={1}
         />
       )}
-      <span className="text-[#c2f0f9] cursor-default select-none">
+      <span className={classNamesText.join(" ")}>
         {props.name}
       </span>
     </div>
