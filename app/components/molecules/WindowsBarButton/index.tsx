@@ -3,7 +3,7 @@ type WindowsBarButtonProps = {
   icon?: React.ReactNode;
   name: string;
   selected: boolean;
-  handleStartClick: (e: React.MouseEvent) => void;
+  handleClick: (e: React.MouseEvent) => void;
 };
 
 export default function WindowsBarButton(props: WindowsBarButtonProps) {
@@ -27,7 +27,7 @@ export default function WindowsBarButton(props: WindowsBarButtonProps) {
       <div className={pseudoClassNames.join(" ")}>
         <button
           className="flex items-center p-[2px] flex-1 text-start cursor-default"
-          onClick={(e: React.MouseEvent) => props.handleStartClick(e)}
+          onClick={(e: React.MouseEvent) => props.handleClick(e)}
         >
           {props.icon}
           <span className={props.selected ? "font-semibold" : "font-normal"}>

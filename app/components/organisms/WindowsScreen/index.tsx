@@ -7,7 +7,7 @@ import DesktopItem from "@/app/components/molecules/DesktopItem";
 type AppType = ComponentType<{
   name: string;
   selected: boolean;
-  handleAppClick: (e: React.MouseEvent) => void;
+  handleOpenedAppClick: (e: React.MouseEvent) => void;
 }>;
 
 type AppInstance = {
@@ -66,7 +66,7 @@ export default function WindowsScreen() {
     console.log(`WindowsBar clicked`);
   }
 
-  function handleAppClick(e: React.MouseEvent, index: number) {
+  function handleOpenedAppClick(e: React.MouseEvent, index: number) {
     e.stopPropagation();
     console.log(`${openedApps[index].props.name} opened app clicked`);
     setisStartSelected(false);
@@ -117,7 +117,7 @@ export default function WindowsScreen() {
             key={i}
             {...props}
             selected={selectedApp === i}
-            handleAppClick={(e: React.MouseEvent) => handleAppClick(e, i)}
+            handleOpenedAppClick={(e: React.MouseEvent) => handleOpenedAppClick(e, i)}
           />
         ))}
       </WindowsBar>

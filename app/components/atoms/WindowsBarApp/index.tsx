@@ -3,7 +3,7 @@ import WindowsBarButton from "@/app/components/molecules/WindowsBarButton";
 type WindowsBarAppProps = {
   name: string;
   selected: boolean;
-  handleAppClick: (e: React.MouseEvent) => void;
+  handleOpenedAppClick: (e: React.MouseEvent) => void;
 };
 
 export default function WindowsBarApp(props: WindowsBarAppProps) {
@@ -12,7 +12,7 @@ export default function WindowsBarApp(props: WindowsBarAppProps) {
       width="180px"
       name={props.name}
       selected={props.selected}
-      handleStartClick={(e: React.MouseEvent) => props.handleAppClick(e)}
+      handleClick={(e: React.MouseEvent) => props.handleOpenedAppClick(e)}
     />
   );
 }

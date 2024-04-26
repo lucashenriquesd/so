@@ -14,7 +14,7 @@ export default function WindowsBarStartButton(
       icon={<StartIconSvg style={{ width: 25, height: 25 }} />}
       name="Start"
       selected={props.isStartSelected}
-      handleStartClick={(e: React.MouseEvent) => props.handleStartClick(e)}
+      handleClick={(e: React.MouseEvent) => props.handleStartClick(e)}
     />
   );
 }
