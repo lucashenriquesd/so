@@ -20,7 +20,7 @@ type AppInstance = {
 export default function WindowsScreen() {
   const tempDefaultOpenedApps: AppInstance[] = [];
   const [openedApps, setOpenedApps] = useState(tempDefaultOpenedApps);
-  const [selectedApp, setSelectedApp] = useState<number | null>(null);
+  const [selectedOpenedApp, setSelectedOpenedApp] = useState<number | null>(null);
   const [isStartSelected, setisStartSelected] = useState(false);
   const [desktopItems, setDesktopItems] = useState([
     {
@@ -53,7 +53,7 @@ export default function WindowsScreen() {
   function handleDesktopClick() {
     console.log("Desktop clicked");
     setisStartSelected(false);
-    setSelectedApp(null);
+    setSelectedOpenedApp(null);
   }
 
   function handleStartClick(e: React.MouseEvent) {
@@ -70,8 +70,8 @@ export default function WindowsScreen() {
     e.stopPropagation();
     console.log(`${openedApps[index].props.name} opened app clicked`);
     setisStartSelected(false);
-    setSelectedApp((prevSelectedApp) =>
-      prevSelectedApp === index ? null : index
+    setSelectedOpenedApp((prevSelectedOpenedApp) =>
+      prevSelectedOpenedApp === index ? null : index
     );
   }
 
@@ -116,7 +116,7 @@ export default function WindowsScreen() {
           <App
             key={i}
             {...props}
-            selected={selectedApp === i}
+            selected={selectedOpenedApp === i}
             handleOpenedAppClick={(e: React.MouseEvent) => handleOpenedAppClick(e, i)}
           />
         ))}
