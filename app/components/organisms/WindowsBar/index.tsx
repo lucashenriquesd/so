@@ -4,7 +4,7 @@ import WindowsBarMenu from "@/app/components/organisms/WindowsBarMenu";
 type WindowsBarProps = {
   children?: React.ReactNode;
   isStartSelected: boolean;
-  handleStartClick: () => void;
+  handleStartClick: (e: React.MouseEvent) => void;
   handleWindowsBarClick: () => void;
 };
 
@@ -18,7 +18,7 @@ export default function WindowsBar(props: WindowsBarProps) {
       >
         <WindowsBarStartButton
           isStartSelected={props.isStartSelected}
-          handleStartClick={props.handleStartClick}
+          handleStartClick={(e: React.MouseEvent) => props.handleStartClick(e)}
         />
         {props.children}
       </div>

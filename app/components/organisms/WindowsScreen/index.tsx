@@ -7,7 +7,7 @@ import DesktopItem from "@/app/components/molecules/DesktopItem";
 type AppType = ComponentType<{
   name: string;
   selected: boolean;
-  handleAppClick: () => void;
+  handleAppClick: (e: React.MouseEvent) => void;
 }>;
 
 type AppInstance = {
@@ -30,13 +30,6 @@ export default function WindowsScreen() {
     },
   ]);
 
-  function openApp(name: string) {
-    setOpenedApps((prevApps) => [
-      ...prevApps,
-      { Component: WindowsBarApp, props: { name } },
-    ]);
-  }
-
   function moveDesktopItem(
     name: string,
     newPosition: { row: number; col: number }
@@ -58,26 +51,41 @@ export default function WindowsScreen() {
   }
 
   function handleDesktopClick() {
-    console.log("Desktop WindowsScreen clicked");
+    console.log("Desktop clicked");
     setisStartSelected(false);
     setSelectedApp(null);
   }
 
-  function handleStartClick() {
-    console.log(`Start WindowsScreen clicked`);
+  function handleStartClick(e: React.MouseEvent) {
+    e.stopPropagation();
+    console.log(`StartButton clicked`);
     setisStartSelected(!isStartSelected);
   }
 
   function handleWindowsBarClick() {
-    console.log(`WindowsBar WindowsScreen clicked`);
+    console.log(`WindowsBar clicked`);
   }
 
-  function handleAppClick(index: number) {
-    console.log(`${openedApps[index].props.name} WindowsScreen clicked`);
+  function handleAppClick(e: React.MouseEvent, index: number) {
+    e.stopPropagation();
+    console.log(`${openedApps[index].props.name} opened app clicked`);
     setisStartSelected(false);
     setSelectedApp((prevSelectedApp) =>
       prevSelectedApp === index ? null : index
     );
+  }
+
+  function handleDesktopItemClick(e: React.MouseEvent, name: string) {
+    e.stopPropagation();
+    console.log(`${name} clicked`);
+  }
+
+  function handleDesktopItemDoubleClick(name: string) {
+    console.log(`${name} double clicked`);
+    setOpenedApps((prevApps) => [
+      ...prevApps,
+      { Component: WindowsBarApp, props: { name } },
+    ]);
   }
 
   return (
@@ -92,13 +100,16 @@ export default function WindowsScreen() {
             image={item.image}
             name={item.name}
             position={item.position}
-            onDoubleClick={() => openApp(item.name)}
+            onClick={(e: React.MouseEvent) =>
+              handleDesktopItemClick(e, item.name)
+            }
+            onDoubleClick={() => handleDesktopItemDoubleClick(item.name)}
           />
         ))}
       </Desktop>
       <WindowsBar
         isStartSelected={isStartSelected}
-        handleStartClick={handleStartClick}
+        handleStartClick={(e: React.MouseEvent) => handleStartClick(e)}
         handleWindowsBarClick={handleWindowsBarClick}
       >
         {openedApps.map(({ Component: App, props }, i) => (
@@ -106,7 +117,7 @@ export default function WindowsScreen() {
             key={i}
             {...props}
             selected={selectedApp === i}
-            handleAppClick={() => handleAppClick(i)}
+            handleAppClick={(e: React.MouseEvent) => handleAppClick(e, i)}
           />
         ))}
       </WindowsBar>
