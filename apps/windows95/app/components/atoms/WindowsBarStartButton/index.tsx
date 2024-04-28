@@ -3,6 +3,7 @@ import StartIconSvg from "./StartIconSvg";
 
 type WindowsBarStartButtonProps = {
   isStartSelected: boolean;
+  // eslint-disable-next-line no-unused-vars
   handleStartClick: (e: React.MouseEvent) => void;
 };
 
