@@ -3,6 +3,7 @@ type WindowsBarButtonProps = {
   icon?: React.ReactNode;
   name: string;
   selected: boolean;
+  // eslint-disable-next-line no-unused-vars
   handleClick: (e: React.MouseEvent) => void;
 };
 

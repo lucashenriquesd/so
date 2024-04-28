@@ -3,6 +3,7 @@ import WindowsBarButton from "@/app/components/molecules/WindowsBarButton";
 type WindowsBarAppProps = {
   name: string;
   selected: boolean;
+  // eslint-disable-next-line no-unused-vars
   handleOpenedAppClick: (e: React.MouseEvent) => void;
 };
 

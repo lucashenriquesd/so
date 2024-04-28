@@ -7,6 +7,7 @@ import DesktopItem from "@/app/components/molecules/DesktopItem";
 type AppType = ComponentType<{
   name: string;
   selected: boolean;
+  // eslint-disable-next-line no-unused-vars
   handleOpenedAppClick: (e: React.MouseEvent) => void;
 }>;
 
