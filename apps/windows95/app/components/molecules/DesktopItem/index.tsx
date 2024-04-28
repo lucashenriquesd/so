@@ -5,13 +5,14 @@ type DesktopItemProps = {
   image: StaticImageData | string;
   name: string;
   position: { row: number; col: number };
+  // eslint-disable-next-line no-unused-vars
   onClick: (e: React.MouseEvent) => void;
   onDoubleClick: () => void;
+  selected: boolean;
 };
 
 export default function DesktopItem(props: DesktopItemProps) {
   const [dragging, setDragging] = useState(false);
-  const [selected, setSelected] = useState(false);
 
   function dragStart(e: React.DragEvent<HTMLDivElement>) {
     setDragging(true);
@@ -23,7 +24,6 @@ export default function DesktopItem(props: DesktopItemProps) {
   }
 
   function handleClick(e: React.MouseEvent) {
-    setSelected(!selected);
     props.onClick(e);
   }
 
@@ -34,7 +34,7 @@ export default function DesktopItem(props: DesktopItemProps) {
     classNames.push("opacity-50");
   }
 
-  if (selected) {
+  if (props.selected) {
     classNamesText.push("bg-[#0005a0]");
     classNamesText.push("border");
     classNamesText.push("border-dotted");

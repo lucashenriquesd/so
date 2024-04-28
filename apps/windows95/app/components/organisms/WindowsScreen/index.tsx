@@ -29,7 +29,13 @@ export default function WindowsScreen() {
       image: "/windows95-mycomputer.png",
       position: { row: 1, col: 1 },
     },
+    {
+      name: "My Documents",
+      image: "/windows95-mycomputer.png",
+      position: { row: 2, col: 1 },
+    },
   ]);
+  const [selectedDesktopItem, setSelectedDesktopItem] = useState<string | null>(null);
 
   function moveDesktopItem(
     name: string,
@@ -55,22 +61,27 @@ export default function WindowsScreen() {
     console.log("Desktop clicked");
     setisStartSelected(false);
     setSelectedOpenedApp(null);
+    setSelectedDesktopItem(null);
   }
 
   function handleStartClick(e: React.MouseEvent) {
     e.stopPropagation();
     console.log(`StartButton clicked`);
+    setSelectedDesktopItem(null);
+    setSelectedOpenedApp(null);
     setisStartSelected(!isStartSelected);
   }
 
   function handleWindowsBarClick() {
     console.log(`WindowsBar clicked`);
+    setSelectedDesktopItem(null);
   }
 
   function handleOpenedAppClick(e: React.MouseEvent, index: number) {
     e.stopPropagation();
     console.log(`${openedApps[index].props.name} opened app clicked`);
     setisStartSelected(false);
+    setSelectedDesktopItem(null);
     setSelectedOpenedApp((prevSelectedOpenedApp) =>
       prevSelectedOpenedApp === index ? null : index
     );
@@ -79,6 +90,13 @@ export default function WindowsScreen() {
   function handleDesktopItemClick(e: React.MouseEvent, name: string) {
     e.stopPropagation();
     console.log(`${name} clicked`);
+    setisStartSelected(false);
+    setSelectedOpenedApp(null);
+    if (selectedDesktopItem === name) {
+      setSelectedDesktopItem(null);
+    } else {
+      setSelectedDesktopItem(name);
+    }
   }
 
   function handleDesktopItemDoubleClick(name: string) {
@@ -105,6 +123,7 @@ export default function WindowsScreen() {
               handleDesktopItemClick(e, item.name)
             }
             onDoubleClick={() => handleDesktopItemDoubleClick(item.name)}
+            selected={selectedDesktopItem === item.name}
           />
         ))}
       </Desktop>
