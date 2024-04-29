@@ -3,6 +3,7 @@ import WindowsBar from "@/app/components/organisms/WindowsBar";
 import WindowsBarApp from "@/app/components/atoms/WindowsBarApp";
 import Desktop from "@/app/components/organisms/Desktop";
 import DesktopItem from "@/app/components/molecules/DesktopItem";
+import Window from "@/app/components/organisms/Window";
 
 type AppType = ComponentType<{
   name: string;
@@ -18,10 +19,20 @@ type AppInstance = {
   };
 };
 
+type WindowType = {
+  id: number;
+  name: string;
+  xAxis: number;
+  yAxis: number;
+  zIndex: number;
+};
+
 export default function WindowsScreen() {
   const tempDefaultOpenedApps: AppInstance[] = [];
   const [openedApps, setOpenedApps] = useState(tempDefaultOpenedApps);
-  const [selectedOpenedApp, setSelectedOpenedApp] = useState<number | null>(null);
+  const [selectedOpenedApp, setSelectedOpenedApp] = useState<number | null>(
+    null
+  );
   const [isStartSelected, setisStartSelected] = useState(false);
   const [desktopItems, setDesktopItems] = useState([
     {
@@ -35,7 +46,10 @@ export default function WindowsScreen() {
       position: { row: 2, col: 1 },
     },
   ]);
-  const [selectedDesktopItem, setSelectedDesktopItem] = useState<string | null>(null);
+  const [selectedDesktopItem, setSelectedDesktopItem] = useState<string | null>(
+    null
+  );
+  const [openWindows, setOpenWindows] = useState<WindowType[]>([]);
 
   function moveDesktopItem(
     name: string,
@@ -101,10 +115,37 @@ export default function WindowsScreen() {
 
   function handleDesktopItemDoubleClick(name: string) {
     console.log(`${name} double clicked`);
+    const xAxis = Math.floor(Math.random() * 1200);
+    const yAxis = Math.floor(Math.random() * 350);
+    const id = openWindows.length;
+    const zIndex = openWindows.length;
     setOpenedApps((prevApps) => [
       ...prevApps,
       { Component: WindowsBarApp, props: { name } },
     ]);
+    setOpenWindows((prevWindows) => [
+      ...prevWindows,
+      { id, name, xAxis, yAxis, zIndex },
+    ]);
+  }
+
+  function handleWindowClick(
+    e: React.MouseEvent,
+    id: number,
+    clickedWindowName: string
+  ) {
+    e.stopPropagation();
+    console.log(`${clickedWindowName} Window clicked`);
+    setOpenWindows((prevWindows) => {
+      const maxZIndex = Math.max(...prevWindows.map((window) => window.zIndex));
+      return prevWindows.map((window) => {
+        if (window.id === id) {
+          return { ...window, zIndex: maxZIndex + 1 };
+        } else {
+          return window;
+        }
+      });
+    });
   }
 
   return (
@@ -126,6 +167,21 @@ export default function WindowsScreen() {
             selected={selectedDesktopItem === item.name}
           />
         ))}
+        {openWindows.map((window, i) => (
+          <Window
+            key={i}
+            id={window.id}
+            name={window.name}
+            xAxis={window.xAxis}
+            yAxis={window.yAxis}
+            zIndex={window.zIndex}
+            onClick={(e: React.MouseEvent) =>
+              handleWindowClick(e, window.id, window.name)
+            }
+          >
+            Content
+          </Window>
+        ))}
       </Desktop>
       <WindowsBar
         isStartSelected={isStartSelected}
@@ -137,7 +193,9 @@ export default function WindowsScreen() {
             key={i}
             {...props}
             selected={selectedOpenedApp === i}
-            handleOpenedAppClick={(e: React.MouseEvent) => handleOpenedAppClick(e, i)}
+            handleOpenedAppClick={(e: React.MouseEvent) =>
+              handleOpenedAppClick(e, i)
+            }
           />
         ))}
       </WindowsBar>
