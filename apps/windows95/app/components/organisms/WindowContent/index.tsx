@@ -3,5 +3,5 @@ type WindowContentProps = {
 };
 
 export default function WindowContent(props: WindowContentProps) {
-  return <div>{props.children}</div>;
+  return <div className="select-none">{props.children}</div>;
 }

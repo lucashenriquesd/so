@@ -25,6 +25,7 @@ type WindowType = {
   xAxis: number;
   yAxis: number;
   zIndex: number;
+  selected?: boolean;
 };
 
 export default function WindowsScreen() {
@@ -129,6 +130,19 @@ export default function WindowsScreen() {
     ]);
   }
 
+  function focusWindow(id: number) {
+    setOpenWindows((prevWindows) => {
+      const maxZIndex = Math.max(...prevWindows.map((window) => window.zIndex));
+      return prevWindows.map((window) => {
+        if (window.id === id) {
+          return { ...window, zIndex: maxZIndex + 1, selected: true };
+        } else {
+          return { ...window, selected: false };
+        }
+      });
+    });
+  }
+
   function handleWindowClick(
     e: React.MouseEvent,
     id: number,
@@ -136,16 +150,16 @@ export default function WindowsScreen() {
   ) {
     e.stopPropagation();
     console.log(`${clickedWindowName} Window clicked`);
-    setOpenWindows((prevWindows) => {
-      const maxZIndex = Math.max(...prevWindows.map((window) => window.zIndex));
-      return prevWindows.map((window) => {
-        if (window.id === id) {
-          return { ...window, zIndex: maxZIndex + 1 };
-        } else {
-          return window;
-        }
-      });
-    });
+  }
+
+  function handleWindowMouseDown(
+    e: React.MouseEvent,
+    id: number,
+    clickedWindowName: string
+  ) {
+    e.stopPropagation();
+    console.log(`${clickedWindowName} Window mouse down`);
+    focusWindow(id);
   }
 
   return (
@@ -175,6 +189,10 @@ export default function WindowsScreen() {
             xAxis={window.xAxis}
             yAxis={window.yAxis}
             zIndex={window.zIndex}
+            selected={window.selected}
+            onMouseDown={(e: React.MouseEvent) =>
+              handleWindowMouseDown(e, window.id, window.name)
+            }
             onClick={(e: React.MouseEvent) =>
               handleWindowClick(e, window.id, window.name)
             }
