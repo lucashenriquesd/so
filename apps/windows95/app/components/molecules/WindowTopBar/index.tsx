@@ -10,11 +10,10 @@ type WindowTopBarProps = {
 
 export default function WindowTopBar(props: WindowTopBarProps) {
   const containerClassNames = ["bg-[#d3d3d3]", "p-[3px]", "h-[30px]"];
-  const textClassNames = ["select-none"];
+  const textClassNames = ["select-none", "text-white"];
 
   if (props.selected) {
     containerClassNames.push("bg-[#000ab2]");
-    textClassNames.push("text-white");
   }
 
   return (
