@@ -58,8 +58,6 @@ export default function Window(props: WindowProps) {
 
   return (
     <div
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
       className={containerClassNames.join(" ")}
       style={{
         top: `${position.y}px`,
@@ -68,7 +66,12 @@ export default function Window(props: WindowProps) {
       }}
       onClick={props.onClick}
     >
-      <WindowTopBar name={props.name} selected={props.selected} />
+      <WindowTopBar
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        name={props.name}
+        selected={props.selected}
+      />
       <WindowContent>{props.children}</WindowContent>
     </div>
   );

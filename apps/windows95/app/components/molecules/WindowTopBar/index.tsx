@@ -2,6 +2,10 @@ type WindowTopBarProps = {
   icon?: React.ReactNode;
   name: string;
   selected?: boolean;
+  // eslint-disable-next-line no-unused-vars
+  onMouseDown: (e: React.MouseEvent) => void;
+  // eslint-disable-next-line no-unused-vars
+  onMouseMove: (e: React.MouseEvent) => void;
 };
 
 export default function WindowTopBar(props: WindowTopBarProps) {
@@ -14,7 +18,11 @@ export default function WindowTopBar(props: WindowTopBarProps) {
   }
 
   return (
-    <div className={containerClassNames.join(" ")}>
+    <div
+      onMouseDown={props.onMouseDown}
+      onMouseMove={props.onMouseMove}
+      className={containerClassNames.join(" ")}
+    >
       {props.icon}
       <span className={textClassNames.join(" ")}>{props.name}</span>
     </div>
